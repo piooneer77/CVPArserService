@@ -5,12 +5,13 @@ namespace CVPArserService.ServiceLogic
 {
     public class CVLogic
     {
-        public void saveFile(HttpPostedFile postedFile)
+        public FileInfo saveFile(HttpPostedFile postedFile)
         {
             postedFile.SaveAs(System.Web.Hosting.HostingEnvironment.MapPath("~/Data/CVRawFiles") + postedFile.FileName);
+            return getTextVersionFromUploadedFile(postedFile.FileName);
         }
 
-        public FileInfo getTextVersionFromUploadedFile(string file)
+        private FileInfo getTextVersionFromUploadedFile(string file)
         {
             string fileName = file.Split('.')[0];
             fileName = file.Split('/')[file.Split('/').Length - 1];
