@@ -1,6 +1,4 @@
 ﻿using CVPArserService.ServiceLogic;
-using System.Net;
-using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 
@@ -10,11 +8,19 @@ namespace CVPArserService.Controllers
     {
         [HttpPost]
         [Route("upload")]
-        public HttpResponseMessage upload(HttpPostedFile file)
+        public IHttpActionResult upload()
         {
+            HttpRequest request = HttpContext.Current.Request;
             CVLogic logic = new CVLogic();
-            logic.saveFile(file);
-            return Request.CreateResponse(HttpStatusCode.Created, file);
+            if(request.Files.Count >= 1)
+            {
+                return Content(System.Net.HttpStatusCode.BadRequest, "One File Allowed");
+            } 
+            else
+            {
+                logic.saveFile(request.Files[0]);
+                return Ok(request.Files);
+            }
         }
     }
 }
