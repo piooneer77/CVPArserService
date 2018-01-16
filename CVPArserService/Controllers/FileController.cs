@@ -12,7 +12,7 @@ namespace CVPArserService.Controllers
         {
             HttpRequest request = HttpContext.Current.Request;
             CVLogic logic = new CVLogic();
-            if(request.Files.Count >= 1)
+            if(request.Files.Count > 1)
             {
                 return Content(System.Net.HttpStatusCode.BadRequest, "One File Allowed");
             } 

@@ -10,7 +10,7 @@ namespace CVPArserService.ServiceLogic
     public class CSVConvertorMethodFactory
     {
         #region Public Methods.
-        public static Func<FileInfo, String> CreateConversionMethod(String fileName)
+        public static Func<String, String> CreateConversionMethod(String fileName)
         {
             if (fileName.ToLower().EndsWith(".docx"))
             {
@@ -28,10 +28,10 @@ namespace CVPArserService.ServiceLogic
         #endregion
 
         #region Private Methods
-        private static String ConvertFromPDF(FileInfo file)
+        private static String ConvertFromPDF(String file)
         {
             StringBuilder pdfText = new StringBuilder();
-            using (PdfReader reader = new PdfReader(file.FullName))
+            using (PdfReader reader = new PdfReader(file))
             {
                 for (int i = 1; i <= reader.NumberOfPages; i++)
                 {
@@ -41,22 +41,22 @@ namespace CVPArserService.ServiceLogic
             return pdfText.ToString();
         }
 
-        private static String ConvertFromDOCX(FileInfo file)
+        private static String ConvertFromDOCX(String file)
         {
             String text;
-            using (WordprocessingDocument wordDocx = WordprocessingDocument.Open(file.FullName, false))
+            using (WordprocessingDocument wordDocx = WordprocessingDocument.Open(file, false))
             {
                 text = EnhanceDocxText(wordDocx.MainDocumentPart.Document.InnerText);
             }
             return text.ToString();
         }
 
-        private static String ConvertFromConventionalText(FileInfo file)
+        private static String ConvertFromConventionalText(String file)
         {
-            return File.ReadAllText(file.FullName, Encoding.Default);
+            return File.ReadAllText(file, Encoding.Default);
         }
 
-        private static string EnhanceDocxText(string text)
+        private static String EnhanceDocxText(String text)
         {
             text = text.Replace("44458890", "");
             return text;

@@ -13,7 +13,7 @@ namespace CVPArserService.Models
         #endregion
 
         #region Constructors
-        public CvFile(FileInfo file)
+        public CvFile(String file)
         {
             this.FileText = getFileText(file);
             this.fileWords = splitFileTextToWords(this.FileText);
@@ -25,9 +25,9 @@ namespace CVPArserService.Models
         #endregion
 
         #region Private Methods
-        private String getFileText(FileInfo file)
+        private String getFileText(String file)
         {
-            Task<String> task = new Task<String>(() => CSVConvertorMethodFactory.CreateConversionMethod(file.Name).Invoke(file));
+            Task<String> task = new Task<String>(() => CSVConvertorMethodFactory.CreateConversionMethod(file).Invoke(file));
             task.Start();
             return task.Result;
         }
