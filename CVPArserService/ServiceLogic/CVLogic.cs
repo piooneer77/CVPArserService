@@ -1,9 +1,9 @@
 ﻿using System.IO;
-using System.Web;;
+using System.Web;
 
 namespace CVPArserService.ServiceLogic
 {
-    public class CVLogic
+    public class CVConverterLogic
     {
         public FileInfo saveFile(HttpPostedFile postedFile)
         {

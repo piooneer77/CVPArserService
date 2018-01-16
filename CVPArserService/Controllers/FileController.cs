@@ -11,7 +11,7 @@ namespace CVPArserService.Controllers
         public IHttpActionResult upload()
         {
             HttpRequest request = HttpContext.Current.Request;
-            CVLogic logic = new CVLogic();
+            CVConverterLogic logic = new CVConverterLogic();
             if(request.Files.Count > 1)
             {
                 return Content(System.Net.HttpStatusCode.BadRequest, "One File Allowed");

@@ -183,6 +183,9 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Models\CvFile.cs" />
+    <Compile Include="ServiceLogic\CVParser.cs" />
+    <Compile Include="Models\ResultViewModel.cs" />
+    <Compile Include="Models\StaticObjects.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceLogic\CSVConvertorMethodFactory.cs" />
     <Compile Include="ServiceLogic\CVLogic.cs" />
